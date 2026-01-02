@@ -6,21 +6,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       {/* HOME セクション */}
-      <section id="home" className="min-h-screen flex items-center bg-white py-20 relative overflow-hidden">
-        {/* 背景画像（控えめに配置） */}
-        <div className="absolute inset-0 opacity-15 pointer-events-none">
-          <div className="relative w-full h-full">
-        <Image
-              src="/Gemini_Generated_Image_g3o6jog3o6jog3o6.png"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="100vw"
-          priority
-        />
-          </div>
-        </div>
-        <div className="mx-auto max-w-4xl px-6 text-center relative z-10">
+      <section id="home" className="min-h-screen flex items-center bg-white py-20">
+        <div className="mx-auto max-w-4xl px-6 text-center">
           <div className="mb-8">
             <div className="inline-block bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-6">
               書籍出版記念
@@ -29,7 +16,7 @@ export default function Home() {
               出版イベント
               <br />
               開催決定
-            </h1>
+          </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-700 mb-8 leading-relaxed px-2">
               書籍『建物は物理学である』の出版を記念し、<br className="hidden sm:block" />
               全国でイベントを開催いたします
@@ -344,7 +331,7 @@ export default function Home() {
                 {/* 商品画像 */}
                 <div className="aspect-square bg-slate-100 relative">
                   {(product.images && product.images.length > 0) || product.image ? (
-                    <Image
+            <Image
                       src={(product.images && product.images.length > 0) ? product.images[0] : product.image!}
                       alt={product.name}
                       fill
