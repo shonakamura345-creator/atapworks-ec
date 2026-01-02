@@ -44,7 +44,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` - Stripe本番公開キー
 - `STRIPE_SECRET_KEY` - Stripe本番シークレットキー
 - `STRIPE_WEBHOOK_SECRET` - Stripe Webhook署名シークレット
-- `NEXT_PUBLIC_BASE_URL` - 本番URL（例: `https://your-domain.com`）
+- `NEXT_PUBLIC_BASE_URL` - 本番URL（例: `https://atapworks.co.jp`）
 - `RESEND_API_KEY` - Resend APIキー
 - `RESEND_FROM_EMAIL` - 送信元メールアドレス
 - `NEXT_PUBLIC_GA_ID` - Google Analytics測定ID（オプション）

@@ -22,9 +22,9 @@ Vercelのダッシュボードで、プロジェクト → Settings → Environm
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_xxxxxxxxxxxxx
 STRIPE_SECRET_KEY=sk_live_xxxxxxxxxxxxx
 STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxx
-NEXT_PUBLIC_BASE_URL=https://your-domain.com
+NEXT_PUBLIC_BASE_URL=https://atapworks.co.jp
 RESEND_API_KEY=re_xxxxxxxxxxxxx
-RESEND_FROM_EMAIL=info@your-domain.com
+RESEND_FROM_EMAIL=info@atapworks.co.jp
 ```
 
 ### オプションの環境変数
@@ -45,7 +45,7 @@ NEXT_PUBLIC_GA_ID=G-xxxxxxxxxx
 
 1. Stripe Dashboard → 「開発者」→「Webhook」
 2. 「エンドポイントを追加」をクリック
-3. エンドポイントURL: `https://your-domain.com/api/webhooks/stripe`
+3. エンドポイントURL: `https://atapworks.co.jp/api/webhooks/stripe`
 4. 監視するイベント: `checkout.session.completed` を選択
 5. 「エンドポイントを追加」をクリック
 6. 「署名シークレットを表示」をクリックして `whsec_...` をコピー
@@ -65,9 +65,10 @@ NEXT_PUBLIC_GA_ID=G-xxxxxxxxxx
 
 ## 7. robots.txtの更新
 
-デプロイ後、`public/robots.txt` の `your-domain.com` を実際のドメインに変更して再デプロイしてください。
+`public/robots.txt` と `app/sitemap.ts` は既に `atapworks.co.jp` に設定されています。
 
 ## 8. 再デプロイ
 
 環境変数を追加/変更した後は、Vercelダッシュボードで「Redeploy」を実行してください。
+
 

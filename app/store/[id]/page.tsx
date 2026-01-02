@@ -18,7 +18,7 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://atapworks.co.jp";
   const productUrl = `${baseUrl}/store/${id}`;
 
   return (
