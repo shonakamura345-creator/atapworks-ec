@@ -77,8 +77,12 @@ export async function POST(request: NextRequest) {
         // amount_totalは合計金額、unit_amountは単価
         const unitAmount = item.price?.unit_amount || item.amount_total || 0;
         const quantity = item.quantity || 1;
+        // productが文字列（ID）の場合とオブジェクトの場合がある
+        const productName = typeof item.price?.product === 'object' && item.price.product && 'name' in item.price.product
+          ? item.price.product.name
+          : undefined;
         return {
-          name: item.description || item.price?.product?.name || "商品",
+          name: item.description || productName || "商品",
           quantity: quantity,
           price: unitAmount, // 既に円単位で保存されている
         };
