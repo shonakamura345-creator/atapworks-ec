@@ -579,11 +579,11 @@ export default function RunningGame() {
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      <div className="bg-slate-100 rounded-2xl p-6 md:p-8">
-        <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 text-center">
+      <div className="bg-slate-100 rounded-2xl p-3 md:p-8">
+        <h3 className="text-xl md:text-3xl font-bold text-slate-900 mb-2 md:mb-4 text-center">
           Sho建築士 街を走るゲーム
         </h3>
-        <p className="text-slate-600 text-center mb-6 text-sm md:text-base">
+        <p className="text-slate-600 text-center mb-3 md:mb-6 text-xs md:text-base hidden md:block">
           PC：スペースキー（または↑キー/Wキー）でジャンプ<br className="hidden md:inline" />
           スマホ：画面をタップしてジャンプ<br className="hidden md:inline" />
           障害物を避けてできるだけ長く走ろう！世界中の街を走り抜けろ！
@@ -608,22 +608,22 @@ export default function RunningGame() {
 
           {gameState === "gameover" && (
             <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center flex-col">
-              <div className="bg-white rounded-2xl p-8 text-center max-w-md mx-4">
-                <h4 className="text-3xl font-bold text-slate-900 mb-4">ゲームオーバー！</h4>
-                <p className="text-xl text-slate-700 mb-2">スコア: {score}</p>
+              <div className="bg-white rounded-2xl p-4 md:p-8 text-center max-w-md mx-2 md:mx-4 w-full max-w-[90%]">
+                <h4 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 md:mb-4">ゲームオーバー！</h4>
+                <p className="text-lg md:text-xl text-slate-700 mb-2">スコア: {score}</p>
                 {score === highScore && score > 0 && (
-                  <p className="text-blue-600 font-semibold mb-4">🎉 ハイスコア更新！</p>
+                  <p className="text-blue-600 font-semibold mb-3 md:mb-4 text-sm md:text-base">🎉 ハイスコア更新！</p>
                 )}
-                <div className="flex gap-4 justify-center">
+                <div className="flex flex-col md:flex-row gap-3 md:gap-4 justify-center">
                   <button
                     onClick={startGame}
-                    className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors"
+                    className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors text-base"
                   >
                     もう一度
                   </button>
                   <button
                     onClick={resetGame}
-                    className="px-6 py-3 bg-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-400 transition-colors"
+                    className="w-full md:w-auto px-6 py-3 bg-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-400 active:bg-slate-500 transition-colors text-base"
                   >
                     戻る
                   </button>
@@ -634,9 +634,9 @@ export default function RunningGame() {
 
           {gameState === "waiting" && (
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-              <div className="bg-white rounded-2xl p-8 text-center max-w-md mx-4">
-                <h4 className="text-2xl font-bold text-slate-900 mb-4">ゲームスタート</h4>
-                <p className="text-slate-600 mb-6">
+              <div className="bg-white rounded-2xl p-4 md:p-8 text-center max-w-md mx-2 md:mx-4 w-full max-w-[90%]">
+                <h4 className="text-xl md:text-2xl font-bold text-slate-900 mb-2 md:mb-4">ゲームスタート</h4>
+                <p className="text-slate-600 mb-4 md:mb-6 text-sm md:text-base hidden md:block">
                   スペースキー（または↑キー/Wキー）でジャンプ
                   <br />
                   スマホ：画面をタップしてジャンプ
@@ -645,10 +645,13 @@ export default function RunningGame() {
                   <br />
                   障害物を避けてできるだけ長く走ろう！
                 </p>
-                {highScore > 0 && <p className="text-slate-700 mb-4">ハイスコア: {highScore}</p>}
+                <p className="text-slate-600 mb-4 md:mb-6 text-xs md:hidden">
+                  画面をタップしてジャンプ！
+                </p>
+                {highScore > 0 && <p className="text-slate-700 mb-3 md:mb-4 text-sm md:text-base">ハイスコア: {highScore}</p>}
                 <button
                   onClick={startGame}
-                  className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors text-lg"
+                  className="w-full md:w-auto px-8 py-3 md:py-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors text-base md:text-lg"
                 >
                   スタート
                 </button>
