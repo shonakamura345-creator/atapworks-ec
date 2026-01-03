@@ -579,17 +579,17 @@ export default function RunningGame() {
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      <div className="bg-slate-100 rounded-2xl p-2 md:p-8">
-        <h3 className="text-lg md:text-3xl font-bold text-slate-900 mb-1 md:mb-4 text-center">
+      <div className="bg-slate-100 rounded-xl md:rounded-2xl p-0 md:p-8">
+        <h3 className="text-sm md:text-3xl font-bold text-slate-900 mb-0 md:mb-4 text-center px-2 pt-2 md:px-0 md:pt-0">
           Sho建築士 街を走るゲーム
         </h3>
-        <p className="text-slate-600 text-center mb-2 md:mb-6 text-xs md:text-base hidden md:block">
+        <p className="text-slate-600 text-center mb-0 md:mb-6 text-xs md:text-base hidden md:block">
           PC：スペースキー（または↑キー/Wキー）でジャンプ<br className="hidden md:inline" />
           スマホ：画面をタップしてジャンプ<br className="hidden md:inline" />
           障害物を避けてできるだけ長く走ろう！世界中の街を走り抜けろ！
         </p>
 
-        <div className="relative bg-white rounded-lg md:rounded-xl overflow-hidden shadow-lg">
+        <div className="relative bg-white rounded-none md:rounded-xl overflow-hidden shadow-lg">
           <canvas
             ref={canvasRef}
             width={800}
