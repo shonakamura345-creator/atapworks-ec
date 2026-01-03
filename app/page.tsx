@@ -55,14 +55,14 @@ export default function Home() {
                 }}
               >
                 <div className="rounded-2xl overflow-hidden shadow-2xl bg-white">
-                  <Image
+        <Image
                     src="/Photoroom_20260103_080646.PNG"
                     alt="Sho建築士"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                  />
+          priority
+        />
                 </div>
               </div>
             </div>
@@ -407,7 +407,7 @@ export default function Home() {
 
       {/* GAME セクション */}
       <section id="game" className="min-h-screen bg-blue-50 py-20">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-2 md:px-6">
           <RunningGame />
         </div>
       </section>

@@ -580,7 +580,7 @@ export default function RunningGame() {
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="bg-slate-100 rounded-xl md:rounded-2xl p-0 md:p-8">
-        <h3 className="text-sm md:text-3xl font-bold text-slate-900 mb-0 md:mb-4 text-center px-2 pt-2 md:px-0 md:pt-0">
+        <h3 className="text-xl md:text-3xl font-bold text-slate-900 mb-2 md:mb-4 text-center px-2 pt-2 md:px-0 md:pt-0">
           Sho建築士 街を走るゲーム
         </h3>
         <p className="text-slate-600 text-center mb-0 md:mb-6 text-xs md:text-base hidden md:block">
