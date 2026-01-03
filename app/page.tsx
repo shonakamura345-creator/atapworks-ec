@@ -1,32 +1,71 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { products } from "./data/products";
+import { useEffect, useState } from "react";
+import RunningGame from "./components/RunningGame";
 
 export default function Home() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <main className="min-h-screen bg-white">
       {/* HOME セクション */}
-      <section id="home" className="min-h-screen flex items-center bg-white py-20">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <div className="mb-8">
-            <div className="inline-block bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-6">
-              書籍出版記念
+      <section id="home" className="min-h-screen flex items-center bg-white py-20 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 w-full">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* 左側：テキストエリア */}
+            <div className="text-center md:text-left">
+              <div className="inline-block bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-6">
+                書籍出版記念
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+                出版イベント
+                <br />
+                開催決定
+              </h1>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-700 mb-8 leading-relaxed">
+                書籍『建物は物理学である』の出版を記念し、<br className="hidden sm:block" />
+                全国でイベントを開催いたします
+              </p>
+              <a
+                href="#schedule"
+                className="inline-block rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white hover:bg-blue-700 transition-colors text-lg"
+              >
+                ツアースケジュールを見る
+              </a>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
-              出版イベント
-              <br />
-              開催決定
-          </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-700 mb-8 leading-relaxed px-2">
-              書籍『建物は物理学である』の出版を記念し、<br className="hidden sm:block" />
-              全国でイベントを開催いたします
-            </p>
-            <a
-              href="#schedule"
-              className="inline-block rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white hover:bg-blue-700 transition-colors text-lg"
-            >
-              ツアースケジュールを見る
-            </a>
+
+            {/* 右側：人物写真（スクロール追従効果付き） */}
+            <div className="relative">
+              <div
+                className="relative w-full aspect-[3/4] max-w-md mx-auto transition-transform duration-75 ease-out"
+                style={{
+                  transform: `translateY(${scrollY * 0.3}px)`,
+                }}
+              >
+                <div className="rounded-2xl overflow-hidden shadow-2xl bg-white">
+                  <Image
+                    src="/Photoroom_20260103_080646.PNG"
+                    alt="Sho建築士"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -363,6 +402,13 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* GAME セクション */}
+      <section id="game" className="min-h-screen bg-blue-50 py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <RunningGame />
         </div>
       </section>
 
