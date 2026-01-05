@@ -44,11 +44,13 @@
 2. 右上の「テストモード」を「**本番モード**」に切り替え
 3. 「開発者」→「API キー」をクリック
 4. 「公開可能キー」の「コピー」をクリック
-5. 例: `pk_live_51AbCdEfGhIjKlMnOpQrStUvWxYz1234567890abcdefghijklmnopqrstuvwxyz`
+5. 例: `pk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
 **設定値：**
 ```
-pk_live_51AbCdEfGhIjKlMnOpQrStUvWxYz...（実際にコピーした値）
+pk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+（実際にStripe Dashboardからコピーした値）
 ```
 
 ---
@@ -59,12 +61,13 @@ pk_live_51AbCdEfGhIjKlMnOpQrStUvWxYz...（実際にコピーした値）
 1. Stripe Dashboard → 「開発者」→「API キー」
 2. 「シークレットキー」の「表示」をクリック（確認画面が表示されます）
 3. 「表示」をクリックして「コピー」をクリック
-4. 例: `sk_live_51AbCdEfGhIjKlMnOpQrStUvWxYz1234567890abcdefghijklmnopqrstuvwxyz`
+4. 例: `sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
 **設定値：**
 ```
-sk_live_51AbCdEfGhIjKlMnOpQrStUvWxYz...（実際にコピーした値）
+sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
+（実際にStripe Dashboardからコピーした値）
 
 ⚠️ **重要**: `pk_test_` や `sk_test_` で始まるテストキーではなく、`pk_live_` や `sk_live_` で始まる**本番キー**を使用してください。
 
@@ -150,7 +153,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = pk_live_xxxxxxxxxxxxx
 
 ### ✅ 正しい例
 ```
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = pk_live_51AbCdEfGhIjKlMnOpQrStUvWxYz1234567890abcdefghijklmnopqrstuvwxyz
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = pk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 → 実際にStripe Dashboardからコピーした値を使用
 

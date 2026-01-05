@@ -63,7 +63,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 
 **Value欄に入力:**
 ```
-pk_live_51AbCdEfGhIjKlMnOpQrStUvWxYz1234567890abcdefghijklmnopqrstuvwxyz
+pk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 （実際にStripe Dashboardからコピーした値）
 
@@ -85,7 +85,7 @@ STRIPE_SECRET_KEY
 
 **Value欄に入力:**
 ```
-sk_live_51AbCdEfGhIjKlMnOpQrStUvWxYz1234567890abcdefghijklmnopqrstuvwxyz
+sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 （実際にStripe Dashboardからコピーした値）
 
