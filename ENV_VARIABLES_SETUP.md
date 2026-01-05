@@ -61,13 +61,13 @@ pk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 1. Stripe Dashboard → 「開発者」→「API キー」
 2. 「シークレットキー」の「表示」をクリック（確認画面が表示されます）
 3. 「表示」をクリックして「コピー」をクリック
-4. 例: `sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
+4. 例: `sk_live_51...` （実際のキーは長い文字列です）
 
 **設定値：**
 ```
-sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+sk_live_51...（実際にStripe Dashboardからコピーした値）
 ```
-（実際にStripe Dashboardからコピーした値）
+⚠️ **注意**: 実際のキーは `sk_live_` で始まる長い文字列です。ここには実際のキーを貼り付けないでください。
 
 ⚠️ **重要**: `pk_test_` や `sk_test_` で始まるテストキーではなく、`pk_live_` や `sk_live_` で始まる**本番キー**を使用してください。
 

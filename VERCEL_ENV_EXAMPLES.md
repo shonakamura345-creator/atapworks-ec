@@ -85,9 +85,9 @@ STRIPE_SECRET_KEY
 
 **Value欄に入力:**
 ```
-sk_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+sk_live_51...（実際にStripe Dashboardからコピーした値）
 ```
-（実際にStripe Dashboardからコピーした値）
+⚠️ **注意**: 実際のキーは `sk_live_` で始まる長い文字列です。ここには実際のキーを貼り付けないでください。
 
 **Environment:**
 - ✅ Production
