@@ -74,6 +74,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Stripe Checkout Sessionを作成
+    // 決済方法: クレジットカードのみ（銀行振込は準備中）
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,

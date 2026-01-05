@@ -566,6 +566,31 @@ export default function CheckoutPage() {
               </div>
             </div>
 
+            {/* 銀行振込についての注意書き */}
+            <div className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4">
+              <div className="flex items-start gap-3">
+                <svg
+                  className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <div className="text-sm text-blue-900">
+                  <p className="font-semibold mb-1">銀行振込について</p>
+                  <p className="text-blue-800">
+                    現在、銀行振込は準備中です。2〜3日で対応可能になります。クレジットカードでのお支払いをお願いいたします。
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <button
               type="submit"
               disabled={isSubmitting}
