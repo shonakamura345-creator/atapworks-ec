@@ -390,9 +390,9 @@ export default function Home() {
                   <div className="text-lg font-semibold text-slate-900 mb-2">
                     {product.name}
                   </div>
-                  {product.description && (
+                  {(product.shortDescription || product.description) && (
                     <p className="text-sm text-slate-600 mb-4">
-                      {product.description}
+                      {product.shortDescription || product.description}
                     </p>
                   )}
                   <div className="text-xl font-semibold text-slate-900">
