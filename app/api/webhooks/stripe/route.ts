@@ -12,6 +12,14 @@ const getStripe = () => {
   });
 };
 
+// GETリクエストに対して405エラーを返す
+export async function GET(request: NextRequest) {
+  return NextResponse.json(
+    { error: "Method Not Allowed. This endpoint only accepts POST requests." },
+    { status: 405 }
+  );
+}
+
 export async function POST(request: NextRequest) {
   try {
     const stripe = getStripe();
