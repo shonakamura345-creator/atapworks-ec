@@ -25,6 +25,7 @@ STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxx
 NEXT_PUBLIC_BASE_URL=https://atapworks.co.jp
 RESEND_API_KEY=re_xxxxxxxxxxxxx
 RESEND_FROM_EMAIL=info@atapworks.co.jp
+ADMIN_EMAIL=info.shokenchikushi@gmail.com
 ```
 
 ### オプションの環境変数
@@ -55,7 +56,8 @@ NEXT_PUBLIC_GA_ID=G-xxxxxxxxxx
 
 1. [Resend Dashboard](https://resend.com/)で本番用APIキーを取得
 2. 送信元メールアドレスを設定（ドメイン認証が必要な場合あり）
-3. `RESEND_API_KEY` と `RESEND_FROM_EMAIL` を設定
+3. `RESEND_API_KEY`、`RESEND_FROM_EMAIL`、`ADMIN_EMAIL` を設定
+   - `ADMIN_EMAIL`: 管理者（あなた）のメールアドレス。購入時に通知が送信されます。
 
 ## 6. Google Analyticsの設定（オプション）
 

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-import { sendOrderConfirmationEmail } from "@/app/lib/email";
+import { sendOrderConfirmationEmail, sendAdminNotificationEmail } from "@/app/lib/email";
 
 const getStripe = () => {
   const secretKey = process.env.STRIPE_SECRET_KEY;
@@ -98,23 +98,69 @@ export async function POST(request: NextRequest) {
         0
       );
 
-      // メール送信処理を呼び出す
-      await sendOrderConfirmationEmail({
-        customerEmail,
-        customerName,
-        orderItems,
-        totalAmount: totalAmount, // 既に円単位
-        shippingInfo: {
-          name: customerName,
-          phone: customerPhone,
-          postalCode: customerPostalCode,
-          prefecture: customerPrefecture,
-          city: customerCity,
-          address: customerAddress,
-          building: customerBuilding,
-        },
-        orderId: session.id,
-      });
+      // 顧客への注文確認メールを送信
+      console.log("📧 顧客への注文確認メールを送信します:");
+      console.log("  顧客メールアドレス:", customerEmail);
+      console.log("  顧客名:", customerName);
+      console.log("  注文ID:", session.id);
+      console.log("  注文アイテム数:", orderItems.length);
+      console.log("  合計金額:", totalAmount);
+      
+      try {
+        await sendOrderConfirmationEmail({
+          customerEmail,
+          customerName,
+          orderItems,
+          totalAmount: totalAmount, // 既に円単位
+          shippingInfo: {
+            name: customerName,
+            phone: customerPhone,
+            postalCode: customerPostalCode,
+            prefecture: customerPrefecture,
+            city: customerCity,
+            address: customerAddress,
+            building: customerBuilding,
+          },
+          orderId: session.id,
+        });
+        console.log("✅ 顧客へのメール送信処理が完了しました");
+      } catch (emailError: any) {
+        console.error("❌ 顧客へのメール送信でエラーが発生しました:");
+        console.error("  エラーメッセージ:", emailError?.message || emailError);
+        console.error("  エラースタック:", emailError?.stack || "スタック情報なし");
+        // メール送信エラーでもWebhookは成功として返す
+      }
+
+      // 管理者への通知メールを送信
+      console.log("📧 管理者への通知メールを送信します");
+      console.log("  管理者メールアドレス:", process.env.ADMIN_EMAIL || "未設定");
+      console.log("  顧客メールアドレス:", customerEmail);
+      console.log("  注文ID:", session.id);
+      
+      try {
+        await sendAdminNotificationEmail({
+          customerEmail,
+          customerName,
+          orderItems,
+          totalAmount: totalAmount, // 既に円単位
+          shippingInfo: {
+            name: customerName,
+            phone: customerPhone,
+            postalCode: customerPostalCode,
+            prefecture: customerPrefecture,
+            city: customerCity,
+            address: customerAddress,
+            building: customerBuilding,
+          },
+          orderId: session.id,
+        });
+        console.log("✅ 管理者へのメール送信処理が完了しました");
+      } catch (emailError: any) {
+        console.error("❌ 管理者へのメール送信でエラーが発生しました:");
+        console.error("  エラーメッセージ:", emailError?.message || emailError);
+        console.error("  エラースタック:", emailError?.stack || "スタック情報なし");
+        // メール送信エラーでもWebhookは成功として返す
+      }
     }
 
     return NextResponse.json({ received: true });
