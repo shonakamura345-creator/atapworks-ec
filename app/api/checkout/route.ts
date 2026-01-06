@@ -74,14 +74,19 @@ export async function POST(request: NextRequest) {
     }
 
     // Stripe Checkout Sessionを作成
-    // 決済方法: クレジットカードのみ（銀行振込は準備中）
+    // 決済方法: クレジットカード、銀行振込
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      payment_method_types: ["card", "customer_balance"],
       line_items: lineItems,
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://atapworks.co.jp"}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://atapworks.co.jp"}/cart`,
       customer_email: customerInfo?.email,
+      payment_method_options: {
+        customer_balance: {
+          funding_type: "bank_transfer",
+        },
+      },
       metadata: {
         customerName: customerInfo?.name || "",
         customerPhone: customerInfo?.phone || "",
