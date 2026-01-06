@@ -247,11 +247,11 @@ export default function CheckoutPage() {
       }
     } catch (error) {
       console.error("決済エラー:", error);
-      alert(
-        error instanceof Error
-          ? error.message
-          : "決済処理中にエラーが発生しました"
-      );
+      const errorMessage = error instanceof Error
+        ? error.message
+        : "決済処理中にエラーが発生しました";
+      console.error("エラーメッセージ:", errorMessage);
+      alert(`決済エラー: ${errorMessage}\n\nブラウザのコンソール（F12キー）で詳細を確認できます。`);
       setIsSubmitting(false);
     }
   };

@@ -21,9 +21,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* NEWS セクション */}
-      <NewsSection />
-
       {/* HOME セクション */}
       <section id="home" className="min-h-screen flex items-center bg-white py-20 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 w-full">
@@ -157,6 +154,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* NEWS セクション */}
+      <NewsSection />
 
       {/* SCHEDULE セクション */}
       <section id="schedule" className="min-h-screen flex items-center bg-white py-20">
