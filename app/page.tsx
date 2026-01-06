@@ -5,6 +5,7 @@ import Image from "next/image";
 import { products } from "./data/products";
 import { useEffect, useState } from "react";
 import RunningGame from "./components/RunningGame";
+import NewsSection from "./components/NewsSection";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -20,6 +21,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
+      {/* NEWS セクション */}
+      <NewsSection />
+
       {/* HOME セクション */}
       <section id="home" className="min-h-screen flex items-center bg-white py-20 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 w-full">

@@ -58,6 +58,13 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 md:flex">
           <a
+            href="#news"
+            onClick={(e) => handleAnchorClick(e, "#news")}
+            className="text-sm font-medium text-slate-700 hover:text-slate-900 cursor-pointer"
+          >
+            NEWS
+          </a>
+          <a
             href="#home"
             onClick={(e) => handleAnchorClick(e, "#home")}
             className="text-sm font-medium text-slate-700 hover:text-slate-900 cursor-pointer"
@@ -172,6 +179,13 @@ export default function Header() {
       {isMenuOpen && (
         <div className="border-t border-slate-200 bg-white md:hidden">
           <nav className="flex flex-col px-4 py-4">
+            <a
+              href="#news"
+              onClick={(e) => handleAnchorClick(e, "#news")}
+              className="py-3 text-sm font-medium text-slate-700 hover:text-slate-900 cursor-pointer"
+            >
+              NEWS
+            </a>
             <a
               href="#home"
               onClick={(e) => handleAnchorClick(e, "#home")}
