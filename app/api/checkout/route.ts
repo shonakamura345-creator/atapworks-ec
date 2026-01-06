@@ -73,6 +73,32 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // 銀行振込を使用する場合、Stripe Customerが必要
+    // メールアドレスから既存のCustomerを検索、なければ作成
+    let customerId: string | undefined;
+    if (customerInfo?.email) {
+      const existingCustomers = await stripe.customers.list({
+        email: customerInfo.email,
+        limit: 1,
+      });
+
+      if (existingCustomers.data.length > 0) {
+        customerId = existingCustomers.data[0].id;
+      } else {
+        // 新しいCustomerを作成
+        const customer = await stripe.customers.create({
+          email: customerInfo.email,
+          name: customerInfo.name,
+          phone: customerInfo.phone,
+          metadata: {
+            customerName: customerInfo.name || "",
+            customerPhone: customerInfo.phone || "",
+          },
+        });
+        customerId = customer.id;
+      }
+    }
+
     // Stripe Checkout Sessionを作成
     // 決済方法: クレジットカード、銀行振込
     const session = await stripe.checkout.sessions.create({
@@ -81,7 +107,8 @@ export async function POST(request: NextRequest) {
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://atapworks.co.jp"}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://atapworks.co.jp"}/cart`,
-      customer_email: customerInfo?.email,
+      customer: customerId, // customer_balanceを使用する場合は必須
+      customer_email: customerInfo?.email, // フォールバック用
       payment_method_options: {
         customer_balance: {
           funding_type: "bank_transfer",
