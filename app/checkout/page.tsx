@@ -566,11 +566,11 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {/* 銀行振込についての案内 */}
-            <div className="mt-4 rounded-lg border border-green-200 bg-green-50 p-4">
+            {/* お支払い方法についての案内 */}
+            <div className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4">
               <div className="flex items-start gap-3">
                 <svg
-                  className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0"
+                  className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -579,13 +579,13 @@ export default function CheckoutPage() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
                   />
                 </svg>
-                <div className="text-sm text-green-900">
-                  <p className="font-semibold mb-1">銀行振込が利用可能になりました</p>
-                  <p className="text-green-800">
-                    クレジットカードに加えて、銀行振込でのお支払いも可能です。決済画面でお選びいただけます。
+                <div className="text-sm text-blue-900">
+                  <p className="font-semibold mb-1">お支払い方法</p>
+                  <p className="text-blue-800">
+                    クレジットカードでお支払いいただけます。
                   </p>
                 </div>
               </div>

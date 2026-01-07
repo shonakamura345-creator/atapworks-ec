@@ -73,51 +73,9 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // 銀行振込を使用する場合、Stripe Customerが必要
-    // メールアドレスから既存のCustomerを検索、なければ作成
-    let customerId: string | undefined;
-    let enableBankTransfer = false;
-    
-    if (customerInfo?.email) {
-      try {
-        const existingCustomers = await stripe.customers.list({
-          email: customerInfo.email,
-          limit: 1,
-        });
-
-        if (existingCustomers.data.length > 0) {
-          customerId = existingCustomers.data[0].id;
-          enableBankTransfer = true;
-        } else {
-          // 新しいCustomerを作成
-          const customer = await stripe.customers.create({
-            email: customerInfo.email,
-            name: customerInfo.name,
-            phone: customerInfo.phone,
-            metadata: {
-              customerName: customerInfo.name || "",
-              customerPhone: customerInfo.phone || "",
-            },
-          });
-          customerId = customer.id;
-          enableBankTransfer = true;
-        }
-      } catch (customerError: any) {
-        console.error("Customer作成/検索エラー:", customerError);
-        // Customer作成に失敗した場合は銀行振込を無効化
-        enableBankTransfer = false;
-      }
-    }
-
-    // 決済方法を決定（Customerが作成できた場合のみ銀行振込を有効化）
-    const paymentMethodTypes: ("card" | "customer_balance")[] = ["card"];
-    if (enableBankTransfer && customerId) {
-      paymentMethodTypes.push("customer_balance");
-    }
-
-    // Stripe Checkout Sessionを作成
-    const sessionConfig: any = {
-      payment_method_types: paymentMethodTypes,
+    // Stripe Checkout Sessionを作成（クレジットカードのみ）
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://atapworks.co.jp"}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
@@ -133,19 +91,7 @@ export async function POST(request: NextRequest) {
         customerBuilding: customerInfo?.building || "",
         newsletter: customerInfo?.newsletter ? "true" : "false",
       },
-    };
-
-    // Customerが作成できた場合のみ、customerとpayment_method_optionsを追加
-    if (enableBankTransfer && customerId) {
-      sessionConfig.customer = customerId;
-      sessionConfig.payment_method_options = {
-        customer_balance: {
-          funding_type: "bank_transfer",
-        },
-      };
-    }
-
-    const session = await stripe.checkout.sessions.create(sessionConfig);
+    });
 
     return NextResponse.json({ sessionId: session.id });
   } catch (error: any) {
@@ -159,4 +105,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
