@@ -4,9 +4,20 @@ export type NewsItem = {
   title: string;
   content: string;
   category?: "重要" | "お知らせ" | "更新";
+  link?: string; // オプショナルなリンクURL
+  linkLabel?: string; // リンクのラベル（デフォルト: "詳細はこちら"）
 };
 
 export const newsItems: NewsItem[] = [
+  {
+    id: "event-2026-01-09",
+    date: "2026-01-09",
+    title: "書店での出版イベントの詳細が決定しました。",
+    content: "",
+    category: "お知らせ",
+    link: "https://store.kinokuniya.co.jp/event/1767864970/",
+    linkLabel: "詳細はこちら",
+  },
   {
     id: "reprint-2026-01-05",
     date: "2026-01-05",

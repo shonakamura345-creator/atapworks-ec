@@ -165,14 +165,44 @@ export default function Home() {
             SCHEDULE
           </h2>
           <div className="space-y-1">
-            {/* 2月 - 東京（詳細未定） */}
+            {/* 2月16日 - 東京新宿紀伊国屋本店 */}
             <div className="py-4 border-b border-blue-100">
               <div className="flex items-center gap-8">
                 <div className="text-slate-900 text-sm font-medium w-32">
-                  TBD
+                  2026.02.16 MON
                 </div>
-                <div className="text-slate-900 font-semibold">
-                  東京 <span className="text-slate-600 font-normal text-sm ml-2">書店イベント</span>
+                <div className="flex-1 flex items-center justify-between gap-4">
+                  <div className="text-slate-900 font-semibold">
+                    <a
+                      href="https://store.kinokuniya.co.jp/event/1767864970/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      東京 <span className="text-slate-600 font-normal text-sm ml-2">紀伊國屋 新宿本店</span>
+                    </a>
+                  </div>
+                  <a
+                    href="https://store.kinokuniya.co.jp/event/1767864970/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 underline whitespace-nowrap"
+                  >
+                    詳細はこちら
+                    <svg
+                      className="h-3 w-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
