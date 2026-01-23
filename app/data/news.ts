@@ -10,6 +10,15 @@ export type NewsItem = {
 
 export const newsItems: NewsItem[] = [
   {
+    id: "kindle-2026-01-22",
+    date: "2026-01-22",
+    title: "Kindle版販売開始",
+    content: "",
+    category: "お知らせ",
+    link: "https://www.amazon.co.jp/%E5%BB%BA%E7%89%A9%E3%81%AF%E7%89%A9%E7%90%86%E5%AD%A6%E3%81%A7%E3%81%82%E3%82%8B-Sho%E5%BB%BA%E7%AF%89%E5%A3%AB-ebook/dp/B0GGX99B3T/ref=tmm_kin_swatch_0",
+    linkLabel: "Amazonで購入",
+  },
+  {
     id: "event-2026-01-09",
     date: "2026-01-09",
     title: "書店での出版イベントの詳細が決定しました。",
