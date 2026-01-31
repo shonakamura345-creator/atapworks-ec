@@ -166,6 +166,178 @@ export async function sendOrderConfirmationEmail({
 /**
  * 管理者に注文通知メールを送信する関数
  */
+type SendShippingNotificationEmailParams = {
+  customerEmail: string;
+  customerName: string;
+  orderItems: OrderItem[];
+  totalAmount: number;
+  shippingInfo: ShippingInfo;
+  orderId: string;
+  trackingNumber: string;
+  estimatedDeliveryDate: string;
+  customMessage?: string;
+};
+
+/**
+ * 発送完了メールを送信する関数
+ */
+export async function sendShippingNotificationEmail({
+  customerEmail,
+  customerName,
+  orderItems,
+  totalAmount,
+  shippingInfo,
+  orderId,
+  trackingNumber,
+  estimatedDeliveryDate,
+  customMessage,
+}: SendShippingNotificationEmailParams) {
+  if (!process.env.RESEND_API_KEY) {
+    console.error("⚠️ RESEND_API_KEYが設定されていません。メールは送信されません。");
+    console.log("📧 発送メール送信（開発モード）:");
+    console.log("送信先:", customerEmail);
+    console.log("件名: 商品を発送しました");
+    console.log("注文ID:", orderId);
+    console.log("追跡番号:", trackingNumber);
+    return { success: false, error: "RESEND_API_KEY not configured" };
+  }
+
+  try {
+    const { Resend } = await import("resend");
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // 注文内容のHTMLを作成
+    const itemsHtml = orderItems
+      .map(
+        (item) => `
+      <tr>
+        <td style="padding: 10px; border-bottom: 1px solid #eee;">${item.name}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: right;">${item.quantity}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: right;">¥${item.price.toLocaleString()}</td>
+      </tr>
+    `
+      )
+      .join("");
+
+    // 日本郵便の追跡URLを生成
+    const trackingUrl = `https://trackings.post.japanpost.jp/services/srv/search/?requestNo1=${trackingNumber}&search.x=0&search.y=0`;
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background-color: #1a1a1a; color: white; padding: 20px; text-align: center; }
+            .content { background-color: #f9f9f9; padding: 20px; }
+            .shipping-info { background-color: #e8f5e9; padding: 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #4caf50; }
+            .order-info { background-color: white; padding: 20px; margin: 20px 0; border-radius: 8px; }
+            table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+            .total { font-size: 18px; font-weight: bold; text-align: right; margin-top: 20px; }
+            .tracking-button { display: inline-block; background-color: #4caf50; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 10px 0; }
+            .custom-message { background-color: #fff3cd; padding: 15px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #ffc107; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>📦 商品を発送しました</h1>
+            </div>
+            <div class="content">
+              <p>${customerName} 様</p>
+              <p>ご注文いただいた商品を発送いたしました。</p>
+              
+              <div class="shipping-info">
+                <h2>📬 配送情報</h2>
+                <p>
+                  <strong>配送業者:</strong> 日本郵便<br>
+                  <strong>追跡番号:</strong> ${trackingNumber}<br>
+                  <strong>お届け予定日:</strong> ${estimatedDeliveryDate}
+                </p>
+                <p>
+                  <a href="${trackingUrl}" class="tracking-button" target="_blank">
+                    配送状況を確認する
+                  </a>
+                </p>
+              </div>
+              
+              ${customMessage ? `
+              <div class="custom-message">
+                <p>${customMessage.replace(/\n/g, '<br>')}</p>
+              </div>
+              ` : ''}
+              
+              <div class="order-info">
+                <h2>ご注文内容</h2>
+                <p><strong>注文ID:</strong> ${orderId}</p>
+                
+                <table>
+                  <thead>
+                    <tr style="background-color: #f0f0f0;">
+                      <th style="padding: 10px; text-align: left;">商品名</th>
+                      <th style="padding: 10px; text-align: right;">数量</th>
+                      <th style="padding: 10px; text-align: right;">金額</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${itemsHtml}
+                  </tbody>
+                </table>
+                
+                <div class="total">
+                  合計金額: ¥${totalAmount.toLocaleString()}
+                </div>
+              </div>
+              
+              <div class="order-info">
+                <h2>配送先</h2>
+                <p>
+                  〒${shippingInfo.postalCode}<br>
+                  ${shippingInfo.prefecture} ${shippingInfo.city} ${shippingInfo.address} ${shippingInfo.building}<br>
+                  ${shippingInfo.name} 様<br>
+                  TEL: ${shippingInfo.phone}
+                </p>
+              </div>
+              
+              <p>ご不明な点がございましたら、お気軽にお問い合わせください。</p>
+              <p>この度はご注文いただき、誠にありがとうございました。</p>
+              
+              <p>Sho建築士オンラインストア</p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+    console.log("📧 Resendで発送通知メールを送信します:");
+    console.log("  From:", fromEmail);
+    console.log("  To:", customerEmail);
+    console.log("  Subject: 商品を発送しました - Sho建築士オンラインストア");
+    console.log("  追跡番号:", trackingNumber);
+
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: customerEmail,
+      subject: "📦 商品を発送しました - Sho建築士オンラインストア",
+      html,
+    });
+
+    if (error) {
+      console.error("❌ Resend発送通知メール送信エラー:", JSON.stringify(error, null, 2));
+      return { success: false, error: error.message };
+    }
+
+    console.log("✅ 発送通知メール送信成功:", JSON.stringify(data, null, 2));
+    return { success: true, emailId: data?.id };
+  } catch (error: any) {
+    console.error("❌ 発送通知メール送信に失敗しました:", error?.message || error);
+    return { success: false, error: error?.message || "Unknown error" };
+  }
+}
+
 export async function sendAdminNotificationEmail({
   customerEmail,
   customerName,

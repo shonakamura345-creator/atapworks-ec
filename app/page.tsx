@@ -6,6 +6,7 @@ import { products } from "./data/products";
 import { useEffect, useState } from "react";
 import RunningGame from "./components/RunningGame";
 import NewsSection from "./components/NewsSection";
+import Hero from "./components/Hero";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -22,54 +23,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       {/* HOME セクション */}
-      <section id="home" className="min-h-screen flex items-center bg-white py-20 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 w-full">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* 左側：テキストエリア */}
-            <div className="text-center md:text-left">
-              <div className="inline-block bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-6">
-                書籍出版記念
-              </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
-                出版イベント
-                <br />
-                開催決定
-              </h1>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-700 mb-8 leading-relaxed">
-                書籍『建物は物理学である』の出版を記念し、<br className="hidden sm:block" />
-                全国でイベントを開催いたします
-              </p>
-              <a
-                href="#schedule"
-                className="inline-block rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white hover:bg-blue-700 transition-colors text-lg"
-              >
-                ツアースケジュールを見る
-              </a>
-            </div>
+      {/* HOME セクション - New Component */}
+      <Hero />
 
-            {/* 右側：人物写真（スクロール追従効果付き） */}
-            <div className="relative">
-              <div
-                className="relative w-full aspect-[3/4] max-w-md mx-auto transition-transform duration-75 ease-out"
-                style={{
-                  transform: `translateY(${scrollY * 0.3}px)`,
-                }}
-              >
-                <div className="rounded-2xl overflow-hidden shadow-2xl bg-white">
-        <Image
-                    src="/Photoroom_20260103_080646.PNG"
-                    alt="Sho建築士"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-          priority
-        />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 本の紹介セクション */}
       <section className="min-h-screen flex items-center bg-blue-50 py-20">
@@ -370,8 +326,8 @@ export default function Home() {
             </p>
             <a
               href="https://lin.ee/nnqRfjX"
-            target="_blank"
-            rel="noopener noreferrer"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#06C755] px-6 py-3 font-semibold text-white hover:bg-[#05B048] transition-colors"
             >
               <svg
@@ -404,7 +360,7 @@ export default function Home() {
                 {/* 商品画像 */}
                 <div className="aspect-square bg-slate-100 relative">
                   {(product.images && product.images.length > 0) || product.image ? (
-            <Image
+                    <Image
                       src={(product.images && product.images.length > 0) ? product.images[0] : product.image!}
                       alt={product.name}
                       fill
@@ -459,8 +415,8 @@ export default function Home() {
             </p>
             <a
               href="https://lin.ee/nnqRfjX"
-            target="_blank"
-            rel="noopener noreferrer"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#06C755] px-8 py-4 font-semibold text-white hover:bg-[#05B048] transition-colors"
             >
               <svg
@@ -475,6 +431,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      </main>
+    </main>
   );
 }
