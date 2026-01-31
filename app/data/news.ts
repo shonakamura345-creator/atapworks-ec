@@ -41,6 +41,13 @@ export const newsItems: NewsItem[] = [
     content: "1月5日第2刷決定",
     category: "お知らせ",
   },
+  {
+    id: "book-release-2025-12-22",
+    date: "2025-12-22",
+    title: "書籍発売開始",
+    content: "全国の書店およびAmazonにて購入可能",
+    category: "お知らせ",
+  },
   // 今後、ページ更新情報などを追加していきます
 ];
 
