@@ -367,6 +367,22 @@ export default function ShippingAdminPage() {
                       </p>
                     ))}
                   </div>
+
+                  {/* 納品書印刷ボタン */}
+                  <div className="border-t border-gray-600 pt-3 mt-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        window.open(
+                          `/admin/invoice/${selectedOrder.orderId}`,
+                          "_blank"
+                        );
+                      }}
+                      className="w-full bg-gray-600 hover:bg-gray-500 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                    >
+                      🖨️ 納品書を印刷
+                    </button>
+                  </div>
                 </div>
 
                 {/* 発送情報入力フォーム */}
