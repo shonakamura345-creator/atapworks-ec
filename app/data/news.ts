@@ -10,6 +10,13 @@ export type NewsItem = {
 
 export const newsItems: NewsItem[] = [
   {
+    id: "reprint3-2026-01-27",
+    date: "2026-01-27",
+    title: "書籍第3刷決定",
+    content: "1月27日第3刷決定",
+    category: "お知らせ",
+  },
+  {
     id: "kindle-2026-01-22",
     date: "2026-01-22",
     title: "Kindle版販売開始",
@@ -28,10 +35,10 @@ export const newsItems: NewsItem[] = [
     linkLabel: "詳細はこちら",
   },
   {
-    id: "reprint-2026-01-05",
+    id: "reprint2-2026-01-05",
     date: "2026-01-05",
-    title: "書籍増刷決定",
-    content: "1月5日増刷決定",
+    title: "書籍第2刷決定",
+    content: "1月5日第2刷決定",
     category: "お知らせ",
   },
   // 今後、ページ更新情報などを追加していきます

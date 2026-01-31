@@ -62,10 +62,10 @@ export default function Hero() {
                     {/* REPLACE with your actual photo: e.g. src="/my-photo.png" */}
                     <div className="relative w-full h-full max-w-md lg:max-w-xl">
                         <Image
-                            src="/Photoroom_20260103_080646.PNG"
+                            src="/hero_from_dsc01192.png"
                             alt="Sho Architect Portrait"
                             fill
-                            className="object-contain object-bottom drop-shadow-2xl"
+                            className="object-contain object-bottom drop-shadow-2xl rounded-2xl"
                             priority
                         />
                     </div>
