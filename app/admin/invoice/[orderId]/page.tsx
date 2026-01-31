@@ -245,9 +245,15 @@ export default function InvoicePage({
 
         {/* 店舗情報 */}
         <div className="mt-12 pt-8 border-t border-gray-300 text-right">
-          <p className="font-bold text-gray-800 mb-1">Sho建築士オンラインストア</p>
+          <p className="font-bold text-gray-800 mb-1">株式会社ATAP Works</p>
+          <p className="text-sm text-gray-600 mb-1">代表 中村奨</p>
+          <p className="text-sm text-gray-600 mb-1">
+            〒150-0002<br />
+            東京都渋谷区渋谷2丁目19-19<br />
+            ワコー宮益坂ビル5階
+          </p>
           <p className="text-sm text-gray-600">
-            ご利用ありがとうございました
+            info.shokenchikushi@gmail.com
           </p>
         </div>
       </div>
