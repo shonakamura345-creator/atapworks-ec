@@ -90,7 +90,8 @@ export async function sendOrderConfirmationEmail({
               
               <div class="order-info">
                 <h2>ご注文内容</h2>
-                <p><strong>注文ID:</strong> ${orderId}</p>
+                <p><strong>注文番号:</strong> ${orderId.slice(-12)}</p>
+                <p style="font-size: 11px; color: #888;">（注文ID: ${orderId}）</p>
                 
                 <table>
                   <thead>
@@ -271,7 +272,8 @@ export async function sendShippingNotificationEmail({
               
               <div class="order-info">
                 <h2>ご注文内容</h2>
-                <p><strong>注文ID:</strong> ${orderId}</p>
+                <p><strong>注文番号:</strong> ${orderId.slice(-12)}</p>
+                <p style="font-size: 11px; color: #888;">（注文ID: ${orderId}）</p>
                 
                 <table>
                   <thead>
@@ -401,7 +403,8 @@ export async function sendAdminNotificationEmail({
             </div>
             <div class="content">
               <div class="alert">
-                <strong>注文ID:</strong> ${orderId}<br>
+                <strong>注文番号:</strong> ${orderId.slice(-12)}<br>
+                <span style="font-size: 11px; color: #666;">注文ID: ${orderId}</span><br>
                 <strong>注文日時:</strong> ${new Date().toLocaleString("ja-JP")}
               </div>
               
