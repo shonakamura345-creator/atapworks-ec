@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCart } from "../contexts/CartContext";
 
 const SHIPPING_FEE = 300;
-const FREE_SHIPPING_THRESHOLD = 0; // 一時的に送料無料
+const FREE_SHIPPING_THRESHOLD = 3000;
 
 export default function CartPage() {
   const {

@@ -14,7 +14,7 @@ const getStripe = () => {
 };
 
 const SHIPPING_FEE = 300;
-const FREE_SHIPPING_THRESHOLD = 0; // 一時的に送料無料
+const FREE_SHIPPING_THRESHOLD = 3000;
 
 export async function POST(request: NextRequest) {
   try {
