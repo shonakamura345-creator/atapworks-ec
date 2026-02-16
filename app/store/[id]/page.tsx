@@ -84,7 +84,7 @@ export default async function ProductDetailPage({ params }: Props) {
               </h3>
               <ul className="text-sm text-slate-600 space-y-2">
                 <li>• <span className="font-semibold">発送目安：</span>2〜3日</li>
-                <li>• <span className="font-semibold">送料：</span>300円（3000円以上で送料無料）</li>
+                <li>• <span className="font-semibold">送料：</span>無料（一時的）</li>
                 <li>• <span className="font-semibold">返品・交換：</span>不良品を除き、返品・交換はお受けできかねます。商品到着後、すぐにご確認ください。不良品の場合は、到着後7日以内にご連絡ください。</li>
               </ul>
             </div>

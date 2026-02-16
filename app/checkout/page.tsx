@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useCart } from "../contexts/CartContext";
 
 const SHIPPING_FEE = 300;
-const FREE_SHIPPING_THRESHOLD = 3000;
+const FREE_SHIPPING_THRESHOLD = 0; // 一時的に送料無料
 
 const PREFECTURES = [
   "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
