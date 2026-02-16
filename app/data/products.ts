@@ -28,7 +28,7 @@ export const products: Product[] = [
   {
     id: "sticker",
     name: "オリジナルステッカーセット",
-    price: 500,
+    price: 600,
     description: "オリジナルデザインのステッカーセットです。",
     image: "/kakunin.jpg",
     images: ["/kakunin.jpg", "/スクリーンショット 2026-01-01 22.34.48.png"],
