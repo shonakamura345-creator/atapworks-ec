@@ -28,11 +28,11 @@ export const products: Product[] = [
   {
     id: "sticker",
     name: "オリジナルステッカーセット",
-    price: 600,
-    description: "オリジナルデザインのステッカーセットです。現在準備中",
+    price: 500,
+    description: "オリジナルデザインのステッカーセットです。",
     image: "/kakunin.jpg",
     images: ["/kakunin.jpg", "/スクリーンショット 2026-01-01 22.34.48.png"],
-    isAvailable: false, // 準備中のため購入不可
+    isAvailable: true,
   },
 ];
 
