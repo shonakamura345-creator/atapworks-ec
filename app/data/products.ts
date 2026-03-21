@@ -29,9 +29,15 @@ export const products: Product[] = [
     id: "sticker",
     name: "オリジナルステッカーセット",
     price: 600,
-    description: "オリジナルデザインのステッカーセットです。",
+    shortDescription: "オリジナル3枚セット（ナマけんくん入り）",
+    description:
+      "オリジナルデザインのステッカー3枚セットです。「ナマけんくん」をはじめ、Sho建築士オリジナルの3種類のステッカーが1セットになっています。",
     image: "/kakunin.jpg",
-    images: ["/kakunin.jpg", "/スクリーンショット 2026-01-01 22.34.48.png"],
+    images: [
+      "/kakunin.jpg",
+      "/スクリーンショット 2026-01-01 22.34.48.png",
+      "/namaken-kun.png",
+    ],
     isAvailable: true,
   },
 ];
