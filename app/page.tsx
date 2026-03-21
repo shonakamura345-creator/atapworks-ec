@@ -125,10 +125,25 @@ export default function Home() {
             {scheduleItems.map((item) => (
               <div
                 key={item.id}
-                className={`py-4 border-b border-blue-100 ${item.isPast ? "opacity-75" : ""}`}
+                className={`py-4 border-b border-blue-100 relative ${
+                  item.isPast ? "opacity-70" : ""
+                }`}
               >
+                {/* 終了イベント: 横線で消す */}
+                {item.isPast && (
+                  <div
+                    className="absolute inset-0 flex items-center pointer-events-none px-6"
+                    aria-hidden
+                  >
+                    <div className="w-full h-px bg-slate-400 ml-36" />
+                  </div>
+                )}
                 <div className="flex items-center gap-8">
-                  <div className="text-slate-900 text-sm font-medium w-32">
+                  <div
+                    className={`text-slate-900 text-sm font-medium w-32 ${
+                      item.isPast ? "line-through text-slate-500" : ""
+                    }`}
+                  >
                     {item.dateLabel}
                     {item.dateLabelSub && (
                       <>
@@ -138,8 +153,16 @@ export default function Home() {
                     )}
                   </div>
                   <div className="flex-1 flex items-center justify-between gap-4 flex-wrap">
-                    <div className="text-slate-900 font-semibold">
-                      {item.detailLink && !item.isPast ? (
+                    <div
+                      className={`font-semibold ${
+                        item.isPast
+                          ? "line-through text-slate-500"
+                          : item.isPostponed
+                            ? "text-amber-700"
+                            : "text-slate-900"
+                      }`}
+                    >
+                      {item.detailLink && !item.isPast && !item.isPostponed ? (
                         <a
                           href={item.detailLink}
                           target="_blank"
@@ -162,7 +185,14 @@ export default function Home() {
                             </span>
                           )}
                           {item.isPast && (
-                            <span className="text-slate-500 font-normal text-xs ml-2">（終了）</span>
+                            <span className="text-slate-500 font-normal text-xs ml-2">
+                              （終了）
+                            </span>
+                          )}
+                          {item.isPostponed && (
+                            <span className="text-amber-600 font-semibold text-xs ml-2">
+                              （延期）
+                            </span>
                           )}
                         </>
                       )}
@@ -191,7 +221,30 @@ export default function Home() {
                           </svg>
                         </a>
                       )}
-                      {item.detailLink && !item.isPast && (
+                      {item.registrationLink && (
+                        <a
+                          href={item.registrationLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-sm font-semibold text-green-600 hover:text-green-700 underline whitespace-nowrap"
+                        >
+                          申し込み
+                          <svg
+                            className="h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                      )}
+                      {item.detailLink && !item.isPast && !item.isPostponed && (
                         <a
                           href={item.detailLink}
                           target="_blank"
