@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { products } from "./data/products";
+import { scheduleItems } from "./data/schedule";
 import { useEffect, useState } from "react";
 import RunningGame from "./components/RunningGame";
 import NewsSection from "./components/NewsSection";
@@ -121,203 +122,103 @@ export default function Home() {
             SCHEDULE
           </h2>
           <div className="space-y-1">
-            {/* 2月16日 - 東京新宿紀伊国屋本店 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2026.02.16 MON
-                </div>
-                <div className="flex-1 flex items-center justify-between gap-4">
-                  <div className="text-slate-900 font-semibold">
-                    <a
-                      href="https://store.kinokuniya.co.jp/event/1767864970/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-blue-600 transition-colors cursor-pointer"
-                    >
-                      東京 <span className="text-slate-600 font-normal text-sm ml-2">紀伊國屋 新宿本店</span>
-                    </a>
+            {scheduleItems.map((item) => (
+              <div
+                key={item.id}
+                className={`py-4 border-b border-blue-100 ${item.isPast ? "opacity-75" : ""}`}
+              >
+                <div className="flex items-center gap-8">
+                  <div className="text-slate-900 text-sm font-medium w-32">
+                    {item.dateLabel}
+                    {item.dateLabelSub && (
+                      <>
+                        <br />
+                        {item.dateLabelSub}
+                      </>
+                    )}
                   </div>
-                  <a
-                    href="https://store.kinokuniya.co.jp/event/1767864970/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 underline whitespace-nowrap"
-                  >
-                    詳細はこちら
-                    <svg
-                      className="h-3 w-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
+                  <div className="flex-1 flex items-center justify-between gap-4 flex-wrap">
+                    <div className="text-slate-900 font-semibold">
+                      {item.detailLink && !item.isPast ? (
+                        <a
+                          href={item.detailLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-blue-600 transition-colors cursor-pointer"
+                        >
+                          {item.location}{" "}
+                          {item.venue && (
+                            <span className="text-slate-600 font-normal text-sm ml-2">
+                              {item.venue}
+                            </span>
+                          )}
+                        </a>
+                      ) : (
+                        <>
+                          {item.location}{" "}
+                          {item.venue && (
+                            <span className="text-slate-600 font-normal text-sm ml-2">
+                              {item.venue}
+                            </span>
+                          )}
+                          {item.isPast && (
+                            <span className="text-slate-500 font-normal text-xs ml-2">（終了）</span>
+                          )}
+                        </>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-4">
+                      {item.noteLink && (
+                        <a
+                          href={item.noteLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-sm font-semibold text-green-600 hover:text-green-700 underline whitespace-nowrap"
+                        >
+                          活動報告はこちら
+                          <svg
+                            className="h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                      )}
+                      {item.detailLink && !item.isPast && (
+                        <a
+                          href={item.detailLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 underline whitespace-nowrap"
+                        >
+                          詳細はこちら
+                          <svg
+                            className="h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* 3月7日 北海道 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.03.7 SAT
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  北海道 <span className="text-slate-600 font-normal text-sm ml-2">札幌</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 3月15日 大阪 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.03.15 SUN
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  大阪 <span className="text-slate-600 font-normal text-sm ml-2">心斎橋</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 3月20日 横浜 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.03.20 FRI
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  横浜 <span className="text-slate-600 font-normal text-sm ml-2">希望が丘</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 3月21日 愛知 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.03.21 SAT
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  愛知 <span className="text-slate-600 font-normal text-sm ml-2">名古屋</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 3月22日 東京 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.03.22 SUN
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  東京 <span className="text-slate-600 font-normal text-sm ml-2">御茶ノ水</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 3月28日 宮城 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.03.28 SAT
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  宮城 <span className="text-slate-600 font-normal text-sm ml-2">仙台</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 4月4日 or 5日 秋田 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.04.4 SAT<br />or 2025.04.5 SUN
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  秋田
-                </div>
-              </div>
-            </div>
-
-            {/* 4月11日 福岡 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.04.11 SAT
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  福岡 <span className="text-slate-600 font-normal text-sm ml-2">赤坂</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 4月12日 東京 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.04.12 SUN
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  東京 <span className="text-slate-600 font-normal text-sm ml-2">立川</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 4月13日 福島 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.04.13 MON
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  福島 <span className="text-slate-600 font-normal text-sm ml-2">郡山</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 4月18日 千葉 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.04.18 SAT
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  千葉 <span className="text-slate-600 font-normal text-sm ml-2">稲毛</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 4月25日 岡山 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.04.25 SAT
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  岡山
-                </div>
-              </div>
-            </div>
-
-            {/* 4月26日 広島 */}
-            <div className="py-4 border-b border-blue-100">
-              <div className="flex items-center gap-8">
-                <div className="text-slate-900 text-sm font-medium w-32">
-                  2025.04.26 SUN
-                </div>
-                <div className="text-slate-900 font-semibold">
-                  広島
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="text-center mt-16 pt-8 border-t border-blue-100">
