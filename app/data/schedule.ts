@@ -37,14 +37,6 @@ export const scheduleItems: ScheduleItem[] = [
     isPast: true,
   },
   {
-    id: "2026-03-15-osaka",
-    date: "2026-03-15",
-    dateLabel: "2026.03.15 SUN",
-    location: "大阪",
-    venue: "心斎橋",
-    isPostponed: true,
-  },
-  {
     id: "2026-03-20-yokohama",
     date: "2026-03-20",
     dateLabel: "2026.03.20 FRI",
@@ -75,13 +67,14 @@ export const scheduleItems: ScheduleItem[] = [
     location: "宮城",
     venue: "仙台",
     detailLink: "https://www.instagram.com/p/DU5rd_Jknkz/",
-    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSeE-HU3DoAxqFpra30tFgXrNLb5EVCXYXQ8owQyZ1oXuKSf_g/viewform",
+    isPast: true,
   },
   {
     id: "2026-04-05-akita",
     date: "2026-04-05",
     dateLabel: "2026.04.5 SUN",
     location: "秋田",
+    isPostponed: true,
   },
   {
     id: "2026-04-11-fukuoka",
@@ -89,6 +82,7 @@ export const scheduleItems: ScheduleItem[] = [
     dateLabel: "2026.04.11 SAT",
     location: "福岡",
     venue: "赤坂",
+    isPast: true,
   },
   {
     id: "2026-04-18-chiba",
@@ -96,6 +90,7 @@ export const scheduleItems: ScheduleItem[] = [
     dateLabel: "2026.04.18 SAT",
     location: "千葉",
     venue: "千葉駅",
+    isPast: true,
   },
   {
     id: "2026-04-20-fukushima",
@@ -103,18 +98,21 @@ export const scheduleItems: ScheduleItem[] = [
     dateLabel: "2026.04.20 MON",
     location: "福島",
     venue: "郡山",
+    isPast: true,
   },
   {
     id: "2026-04-25-okayama",
     date: "2026-04-25",
     dateLabel: "2026.04.25 SAT",
     location: "岡山",
+    isPast: true,
   },
   {
     id: "2026-04-26-hiroshima",
     date: "2026-04-26",
     dateLabel: "2026.04.26 SUN",
     location: "広島",
+    isPast: true,
   },
   {
     id: "2026-05-17-tokyo",
@@ -122,6 +120,15 @@ export const scheduleItems: ScheduleItem[] = [
     dateLabel: "2026.05.17 SUN",
     location: "東京",
     venue: "立川",
+    detailLink: "https://www.instagram.com/p/DXd-aTSDmr2/",
+    registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSf9cxr4i-mVFzp04F2nQMKc6nYKqij2wDSdUO4lzrXMldcXsQ/viewform",
+  },
+  {
+    id: "2026-06-07-osaka",
+    date: "2026-06-07",
+    dateLabel: "2026.06.7 SUN",
+    location: "大阪",
+    venue: "心斎橋",
   },
 ];
 
