@@ -10,6 +10,7 @@ import Hero from "./components/Hero";
 import WorksSection from "./components/WorksSection";
 import ResultsSection from "./components/ResultsSection";
 import AboutSection from "./components/AboutSection";
+import MediaSection from "./components/MediaSection";
 import ContactForm from "./components/ContactForm";
 
 export default function Home() {
@@ -28,9 +29,12 @@ export default function Home() {
       {/* ABOUT（Sho建築士について） */}
       <AboutSection />
 
+      {/* MEDIA（発信チャンネル） */}
+      <MediaSection />
+
 
       {/* 本の紹介セクション */}
-      <section className="min-h-screen flex items-center bg-blue-50 py-20">
+      <section className="min-h-screen flex items-center bg-base py-20">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* 左側：本の表紙画像エリア */}
@@ -53,7 +57,7 @@ export default function Home() {
             {/* 右側：タイトルと説明 */}
             <div className="text-center md:text-left">
               <div className="mb-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+                <h2 className="font-head text-2xl md:text-3xl font-bold text-ink mb-3">
                   建物は物理学である
                 </h2>
                 <p className="text-lg font-semibold text-slate-700 mb-4">
@@ -90,7 +94,7 @@ export default function Home() {
               </div>
               <a
                 href="#goods"
-                className="inline-block rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white hover:bg-blue-700 transition-colors text-lg"
+                className="btn-ocean inline-block px-8 py-4 font-semibold text-lg"
               >
                 書籍を購入する
               </a>
@@ -105,7 +109,7 @@ export default function Home() {
       {/* SCHEDULE セクション */}
       <section id="schedule" className="min-h-screen flex items-center bg-white py-20">
         <div className="mx-auto max-w-3xl px-6 w-full">
-          <h2 className="text-4xl font-bold text-slate-900 mb-16 text-center">
+          <h2 className="font-head text-4xl font-bold text-ink mb-16 text-center">
             SCHEDULE
           </h2>
           <div className="space-y-1">
@@ -287,7 +291,7 @@ export default function Home() {
       {/* GOODS セクション */}
       <section id="goods" className="min-h-screen bg-white py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center">
+          <h2 className="font-head text-4xl font-bold text-ink mb-12 text-center">
             GOODS
           </h2>
 
@@ -337,7 +341,7 @@ export default function Home() {
       </section>
 
       {/* GAME セクション */}
-      <section id="game" className="min-h-screen bg-blue-50 py-20">
+      <section id="game" className="min-h-screen bg-base py-20">
         <div className="mx-auto max-w-6xl px-2 md:px-6">
           <RunningGame />
         </div>

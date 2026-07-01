@@ -72,6 +72,13 @@ export default function Header() {
             ABOUT
           </a>
           <a
+            href="#media"
+            onClick={(e) => handleAnchorClick(e, "#media")}
+            className="text-sm font-medium text-slate-700 hover:text-slate-900 cursor-pointer"
+          >
+            MEDIA
+          </a>
+          <a
             href="#news"
             onClick={(e) => handleAnchorClick(e, "#news")}
             className="text-sm font-medium text-slate-700 hover:text-slate-900 cursor-pointer"
@@ -206,6 +213,13 @@ export default function Header() {
               className="py-3 text-sm font-medium text-slate-700 hover:text-slate-900 cursor-pointer"
             >
               ABOUT
+            </a>
+            <a
+              href="#media"
+              onClick={(e) => handleAnchorClick(e, "#media")}
+              className="py-3 text-sm font-medium text-slate-700 hover:text-slate-900 cursor-pointer"
+            >
+              MEDIA
             </a>
             <a
               href="#news"
