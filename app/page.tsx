@@ -4,28 +4,29 @@ import Link from "next/link";
 import Image from "next/image";
 import { products } from "./data/products";
 import { scheduleItems } from "./data/schedule";
-import { useEffect, useState } from "react";
 import RunningGame from "./components/RunningGame";
 import NewsSection from "./components/NewsSection";
 import Hero from "./components/Hero";
+import WorksSection from "./components/WorksSection";
+import ResultsSection from "./components/ResultsSection";
+import AboutSection from "./components/AboutSection";
+import ContactForm from "./components/ContactForm";
 
 export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <main className="min-h-screen bg-white">
       {/* HOME セクション */}
       {/* HOME セクション - New Component */}
       <Hero />
+
+      {/* WORKS セクション（仕事・コラボの依頼） */}
+      <WorksSection />
+
+      {/* 実績（代表作の動画） */}
+      <ResultsSection />
+
+      {/* ABOUT（Sho建築士について） */}
+      <AboutSection />
 
 
       {/* 本の紹介セクション */}
@@ -35,31 +36,17 @@ export default function Home() {
             {/* 左側：本の表紙画像エリア */}
             <div className="text-center md:text-left">
               <div className="relative aspect-[3/4] max-w-sm mx-auto md:mx-0">
-                {/* 本の表紙画像 - 商品データから取得 */}
-                {products.find(p => p.id === "book")?.image ? (
-                  <div className="w-full h-full rounded-2xl overflow-hidden shadow-2xl relative bg-white">
-                    <Image
-                      src={products.find(p => p.id === "book")!.image!}
-                      alt="建物は物理学である"
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
-                ) : (
-                  <div className="w-full h-full rounded-2xl bg-gradient-to-br from-blue-50 to-white border-4 border-blue-100 shadow-2xl flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <div className="text-4xl mb-4">📖</div>
-                      <p className="text-sm text-slate-600 font-medium">
-                        書籍の表紙画像を<br />
-                        こちらに表示します
-                      </p>
-                      <p className="text-xs text-slate-400 mt-2">
-                        （画像を追加予定）
-                      </p>
-                    </div>
-                  </div>
-                )}
+                {/* 出版イベントで書籍を持つSho建築士 */}
+                <div className="w-full h-full rounded-2xl overflow-hidden shadow-2xl relative bg-white">
+                  <Image
+                    src="/book-event.jpg"
+                    alt="出版イベントで『建物は物理学である』を持つSho建築士"
+                    fill
+                    className="object-cover"
+                    style={{ objectPosition: "50% 30%" }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
               </div>
             </div>
 
@@ -356,33 +343,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT セクション */}
-      <section id="contact" className="min-h-screen flex items-center bg-white py-20">
+      {/* CONTACT セクション（仕事・コラボのご相談フォーム） */}
+      <section id="contact" className="bg-white py-20">
         <div className="mx-auto max-w-2xl px-6 w-full">
-          <h2 className="text-4xl font-bold text-slate-900 mb-8 text-center">
-            CONTACT
-          </h2>
-          <div className="rounded-2xl border border-blue-100 bg-blue-50 p-8 text-center">
-            <p className="text-slate-700 mb-8 text-lg">
-              ご質問やお問い合わせがございましたら、<br />
-              公式LINEからお気軽にご連絡ください。
+          <div className="text-center mb-8">
+            <div className="eyebrow">CONTACT</div>
+            <h2 className="font-head text-3xl md:text-4xl font-bold text-ink mt-3">
+              仕事・コラボのご相談
+            </h2>
+            <p className="text-sm text-ink-sub mt-4 leading-relaxed">
+              動画、SNS、ツアー、登壇——どの入り口からでも構いません。
+              <br className="hidden sm:block" />
+              「こんなことできますか？」の一言から、一緒に建築を盛り上げる方法を考えます。
             </p>
-            <a
-              href="https://lin.ee/nnqRfjX"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#06C755] px-8 py-4 font-semibold text-white hover:bg-[#05B048] transition-colors"
-            >
-              <svg
-                className="h-6 w-6"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.086.766.062 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
-              </svg>
-              LINEでお問い合わせ
-            </a>
           </div>
+          <ContactForm />
         </div>
       </section>
     </main>

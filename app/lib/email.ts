@@ -488,4 +488,93 @@ export async function sendAdminNotificationEmail({
   }
 }
 
+/**
+ * 仕事・コラボの問い合わせメールを中村さん（管理者）へ送信する関数
+ * 公式HPのお問い合わせフォームから呼ばれる
+ */
+type SendContactInquiryEmailParams = {
+  inquiryType: string;
+  name: string;
+  company?: string;
+  email: string;
+  message?: string;
+};
+
+export async function sendContactInquiryEmail({
+  inquiryType,
+  name,
+  company,
+  email,
+  message,
+}: SendContactInquiryEmailParams): Promise<{ success: boolean; error?: string }> {
+  const adminEmail = process.env.ADMIN_EMAIL || "info.shokenchikushi@gmail.com";
+
+  if (!process.env.RESEND_API_KEY) {
+    console.error("⚠️ RESEND_API_KEYが設定されていません。問い合わせメールは送信されません。");
+    console.log("📧 お問い合わせ（開発モード）:", { inquiryType, name, company, email, message });
+    // 開発環境では送信成功扱いにして画面の確認をしやすくする
+    return { success: true };
+  }
+
+  try {
+    const { Resend } = await import("resend");
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    const esc = (s: string) =>
+      s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <head><meta charset="utf-8">
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background-color: #2563eb; color: white; padding: 20px; text-align: center; }
+            .content { background-color: #f9f9f9; padding: 20px; }
+            .info { background-color: white; padding: 20px; margin: 16px 0; border-radius: 8px; }
+            .label { font-weight: bold; color: #1e293b; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header"><h1>📨 公式HPから新しいお問い合わせ</h1></div>
+            <div class="content">
+              <div class="info">
+                <p><span class="label">ご用件:</span> ${esc(inquiryType)}</p>
+                <p><span class="label">お名前 / 会社名:</span> ${esc(name)}${company ? ` / ${esc(company)}` : ""}</p>
+                <p><span class="label">メール:</span> ${esc(email)}</p>
+                <p><span class="label">内容:</span><br>${message ? esc(message).replace(/\n/g, "<br>") : "（記載なし）"}</p>
+              </div>
+              <p style="font-size:12px;color:#888;">このメールに直接返信すると、送信者（${esc(email)}）へ返信できます。</p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: adminEmail,
+      replyTo: email,
+      subject: `【お仕事の相談】${inquiryType} - ${name}`,
+      html,
+    });
+
+    if (error) {
+      console.error("❌ お問い合わせメール送信エラー:", JSON.stringify(error, null, 2));
+      return { success: false, error: error.message };
+    }
+
+    console.log("✅ お問い合わせメール送信成功:", data?.id || "不明");
+    return { success: true };
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : "Unknown error";
+    console.error("❌ お問い合わせメール送信に失敗しました:", msg);
+    return { success: false, error: msg };
+  }
+}
+
 

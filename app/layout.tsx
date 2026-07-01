@@ -1,19 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_JP, Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { CartProvider } from "./contexts/CartContext";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// 本文・見出し：Noto Sans JP（統一）/ 数字：Montserrat
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montserrat = Montserrat({
+  variable: "--font-num",
   subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -48,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${notoSansJP.variable} ${montserrat.variable} antialiased`}
       >
         <GoogleAnalytics />
         <CartProvider>
