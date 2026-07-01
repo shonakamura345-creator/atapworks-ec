@@ -23,11 +23,6 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#schedule" className="text-slate-600 hover:text-slate-900">
-                  SCHEDULE
-                </a>
-              </li>
-              <li>
                 <a href="#goods" className="text-slate-600 hover:text-slate-900">
                   GOODS
                 </a>
