@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-slate-900 mb-4">Sho建築士</h3>
             <p className="text-sm text-slate-600">
-              公式オンラインストア
+              公式サイト
             </p>
           </div>
 
