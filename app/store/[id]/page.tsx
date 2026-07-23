@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,6 +11,47 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://atapworks.co.jp";
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const product = getProductById(id);
+
+  if (!product) {
+    return { title: "商品が見つかりません | Sho建築士 公式サイト" };
+  }
+
+  const image =
+    (product.images && product.images.length > 0
+      ? product.images[0]
+      : product.image) || "/hero.jpg";
+  const description =
+    product.description ||
+    product.shortDescription ||
+    `${product.name}｜Sho建築士 公式オンラインストア`;
+
+  return {
+    title: `${product.name} | Sho建築士 公式サイト`,
+    description,
+    alternates: {
+      canonical: `/store/${id}`,
+    },
+    openGraph: {
+      title: product.name,
+      description,
+      type: "website",
+      url: `/store/${id}`,
+      images: [{ url: image, alt: product.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description,
+      images: [image],
+    },
+  };
+}
+
 export default async function ProductDetailPage({ params }: Props) {
   const { id } = await params;
   const product = getProductById(id);
@@ -18,11 +60,44 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://atapworks.co.jp";
   const productUrl = `${baseUrl}/store/${id}`;
+
+  const productImages = (
+    product.images && product.images.length > 0
+      ? product.images
+      : product.image
+      ? [product.image]
+      : []
+  ).map((img) => encodeURI(`${baseUrl}${img}`));
+
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description || product.shortDescription || product.name,
+    ...(productImages.length > 0 ? { image: productImages } : {}),
+    brand: {
+      "@type": "Brand",
+      name: "Sho建築士",
+    },
+    offers: {
+      "@type": "Offer",
+      url: productUrl,
+      priceCurrency: "JPY",
+      price: product.price,
+      availability:
+        product.isAvailable === false
+          ? "https://schema.org/OutOfStock"
+          : "https://schema.org/InStock",
+    },
+  };
 
   return (
     <main className="min-h-screen bg-white p-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <div className="mx-auto max-w-4xl">
         <Link
           href="/#goods"
@@ -94,4 +169,3 @@ export default async function ProductDetailPage({ params }: Props) {
     </main>
   );
 }
-
