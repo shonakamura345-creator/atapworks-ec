@@ -39,7 +39,7 @@ export default function Hero() {
           </p>
 
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-sub">
-            設計の現場を知る一級建築士でありながら、SNSで建築を語り、全国の建物を訪ね歩く。専門性とわかりやすさ、その両方で届けられる発信があります。動画制作・SNS運用・建築ツアー・登壇——建築の「伝える」を、まとめてご相談ください。
+            現場を知る一級建築士でありながら、SNSで建築を語り、全国の建物を訪ね歩く。専門性とわかりやすさ、その両方で届けられる発信があります。動画制作・SNS運用・建築ツアー・登壇——建築の「伝える」を、まとめてご相談ください。
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
