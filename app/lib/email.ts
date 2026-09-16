@@ -554,14 +554,40 @@ export async function sendContactInquiryEmail({
     `;
 
     const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+    // 管理者宛て＋控え（CONTACT_CC_EMAIL があれば同報）
+    const recipients = [adminEmail, process.env.CONTACT_CC_EMAIL]
+      .filter((v): v is string => !!v)
+      .filter((v, i, arr) => arr.indexOf(v) === i);
+    const subject = `【お仕事の相談】${inquiryType} - ${name}`;
+    const text = [
+      `ご用件: ${inquiryType}`,
+      `お名前: ${name}${company ? ` / ${company}` : ""}`,
+      `メール: ${email}`,
+      "",
+      "内容:",
+      message || "（記載なし）",
+    ].join("\n");
 
-    const { data, error } = await resend.emails.send({
-      from: fromEmail,
-      to: adminEmail,
-      replyTo: email,
-      subject: `【お仕事の相談】${inquiryType} - ${name}`,
-      html,
-    });
+    const trySend = async (from: string) =>
+      resend.emails.send({
+        from,
+        to: recipients,
+        replyTo: email,
+        subject,
+        html,
+        text,
+      });
+
+    let { data, error } = await trySend(fromEmail);
+
+    // 独自ドメインの認証が落ちている等で送れない場合は、Resend既定の送信元で再試行する
+    if (error && fromEmail !== "onboarding@resend.dev") {
+      console.error(
+        "⚠️ 独自ドメインからの送信に失敗。既定送信元で再試行します:",
+        JSON.stringify(error)
+      );
+      ({ data, error } = await trySend("onboarding@resend.dev"));
+    }
 
     if (error) {
       console.error("❌ お問い合わせメール送信エラー:", JSON.stringify(error, null, 2));

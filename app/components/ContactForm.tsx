@@ -10,6 +10,8 @@ const inquiryTypes = [
   "その他",
 ];
 
+const FALLBACK_EMAIL = "info.shokenchikushi@gmail.com";
+
 const inputClass =
   "w-full rounded-2xl border-soft bg-white px-4 py-3 text-ink focus:border-[#4faddf] focus:outline-none focus:ring-2 focus:ring-[#4faddf]/20";
 
@@ -152,7 +154,34 @@ export default function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p className="mb-4 text-sm text-red-600">{errorMsg}</p>
+        <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <p className="font-semibold">{errorMsg}</p>
+          <p className="mt-1 text-red-600">
+            お手数ですが、
+            <a
+              href={`mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent(
+                `【お仕事の相談】${form.inquiryType} - ${form.name}`
+              )}&body=${encodeURIComponent(
+                `ご用件: ${form.inquiryType}\nお名前: ${form.name}${
+                  form.company ? ` / ${form.company}` : ""
+                }\nメール: ${form.email}\n\n${form.message}`
+              )}`}
+              className="font-semibold underline"
+            >
+              メールで直接送る
+            </a>
+            か、
+            <a
+              href="https://lin.ee/nnqRfjX"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline"
+            >
+              公式LINE
+            </a>
+            からご連絡ください。
+          </p>
+        </div>
       )}
 
       <button
