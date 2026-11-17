@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Sho建築士 公式サイト | 建築を、動画・SNS・旅で伝える一級建築士",
   description:
-    "一級建築士Sho建築士（中村奨）の公式サイト。建築動画の制作、企業SNS運用、建築ツアー、登壇・監修のご依頼はこちらから。InstagramとTikTokで累計1.4億回再生超・SNS総フォロワー15万人超。書籍『建物は物理学である』も販売中。",
+    "一級建築士Sho建築士（中村奨）の公式サイト。建築動画の制作、企業SNS運用、建築ツアー、登壇・監修のご依頼はこちらから。InstagramとTikTokで累計1.4億回再生超・SNS総フォロワー15.6万人超。書籍『建物は物理学である』も販売中。",
   keywords:
     "Sho建築士, 中村奨, 一級建築士, 建築動画, SNS運用代行, 建築ツアー, 登壇, 建物は物理学である",
   alternates: {
