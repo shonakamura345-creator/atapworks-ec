@@ -38,7 +38,7 @@ export const workServices: WorkService[] = [
     image: "/works/sns.jpg",
     imageAlt: "建築現場で撮影するSho建築士",
     imagePosition: "50% 55%",
-    proof: "自アカウントで累計約8,000万回再生・総フォロワー15万超を運用",
+    proof: "自アカウントで累計1.4億回再生超・総フォロワー15万超を運用",
   },
   {
     id: "tour",

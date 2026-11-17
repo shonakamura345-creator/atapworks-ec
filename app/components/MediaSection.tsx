@@ -21,7 +21,7 @@ const channels = [
   {
     label: "TIKTOK",
     name: "ショート動画",
-    note: "建築解説 累計約8,000万回再生",
+    note: "建築解説 累計約9,000万回再生",
     url: "https://www.tiktok.com/@kenchikushi_sho",
   },
   {

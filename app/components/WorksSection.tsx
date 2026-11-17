@@ -4,9 +4,9 @@ import { workServices } from "../data/works";
 
 // 実績の数字（社会的証明）
 const stats: { num: string; label: string; href?: string }[] = [
-  { num: "約8,000万", label: "TikTok建築解説 累計再生数" },
+  { num: "1.4億超", label: "InstagramとTikTok 累計再生数" },
   { num: "15万超", label: "SNS総フォロワー数" },
-  { num: "5,500部", label: "著書『建物は物理学である』（第3刷）" },
+  { num: "6,500部", label: "著書『建物は物理学である』（第4刷）" },
   { num: "40件超", label: "企業・自治体タイアップ実績" },
   { num: "15回超", label: "建築ツアー・ウォーク主催" },
   {
